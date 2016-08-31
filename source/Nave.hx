@@ -31,9 +31,13 @@ class Nave extends FlxSprite
 		return y;
 	}
 	
-	public function Move() //Completar
+	override public function update(elapsed:Float):Void 
 	{
-		
+		super.update(elapsed);
+		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) //MOVIMIENTO HORIZONTAL DE LA NAVE (controles y velocidad).
+		x += 1;
+		else if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT)
+		x -= 1;
 	}
 	
 }
