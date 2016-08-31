@@ -12,6 +12,8 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
+		var zazz:Nave = new Nave();
+		add(zazz);
 	}
 
 	override public function update(elapsed:Float):Void
