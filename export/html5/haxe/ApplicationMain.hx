@@ -127,7 +127,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "1",
+			build: "27",
 			company: "HaxeFlixel",
 			file: "Project Space Invaders",
 			fps: 60,
@@ -145,13 +145,13 @@ class ApplicationMain {
 					display: 0,
 					fullscreen: false,
 					hardware: false,
-					height: 144,
+					height: 432,
 					parameters: "{}",
 					resizable: false,
 					stencilBuffer: true,
 					title: "Project Space Invaders",
 					vsync: true,
-					width: 160,
+					width: 480,
 					x: null,
 					y: null
 				},
@@ -169,7 +169,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 160, 144, "000000");
+		openfl.Lib.embed (null, 480, 432, "000000");
 		#end
 		#else
 		create ();
