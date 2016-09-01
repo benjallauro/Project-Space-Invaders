@@ -35,9 +35,9 @@ class Nave extends FlxSprite
 	{
 		super.update(elapsed);
 		if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) //MOVIMIENTO HORIZONTAL DE LA NAVE (controles y velocidad).
-		x += 1;
+			x += 1;
 		else if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT)
-		x -= 1;
+			x -= 1;
 	}
 	
 }
