@@ -12,6 +12,7 @@ class PlayState extends FlxState
 	var arrayEnemigos:Array<Enemigos>;
 	
 	
+	
 	public function crearEnemigos():Void
 	{
 		arrayEnemigos = new Array();
@@ -29,8 +30,7 @@ class PlayState extends FlxState
 		crearEnemigos();
 		
 		var zazz:Nave = new Nave();
-		add(zazz);
-	
+		add(zazz);	
 	}
 
 	override public function update(elapsed:Float):Void
