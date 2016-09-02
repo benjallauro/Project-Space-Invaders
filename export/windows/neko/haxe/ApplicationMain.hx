@@ -511,7 +511,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "92",
+			build: "204",
 			company: "HaxeFlixel",
 			file: "Project Space Invaders",
 			fps: 60,

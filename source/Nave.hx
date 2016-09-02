@@ -4,13 +4,15 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 import flixel.FlxG;
+
 /**
  * ...
  * @author ...
  */
 class Nave extends FlxSprite
 {
-
+	var tiroCargado:Bool = true;
+	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -19,6 +21,15 @@ class Nave extends FlxSprite
 		
 		x = (FlxG.width / 2) - width / 2;
 		y = 120;
+	}
+	
+	public function CambiarBooleano()
+	{
+		if (tiroCargado == false)
+		tiroCargado= true;
+		
+		else
+		tiroCargado = false;
 	}
 	
 	public function GetX()
@@ -38,6 +49,22 @@ class Nave extends FlxSprite
 			x += 1;
 		else if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT)
 			x -= 1;
+			
+		if (FlxG.keys.pressed.SPACE)
+			{
+				var shot:Disparo = new Disparo();
+				if (shot.y > 0.0  && tiroCargado == true)
+				{
+					shot.x = this.x;
+					FlxG.state.add(shot);
+					CambiarBooleano(); //se vuelve false
+				}
+				else
+				{
+					shot.destroy();
+				}
+				
+			}
 	}
 	
 }

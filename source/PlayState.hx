@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
  */
 class PlayState extends FlxState
 {
+	
 	var arrayEnemigos:Array<Enemigos>;	
 	public function crearEnemigos():Void
 	{
