@@ -15,7 +15,7 @@ class Disparo extends FlxSprite
 	public function new(_tipoDisparo:String,?X:Float, ?Y:Float, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(5, 10, FlxColor.YELLOW);
+		makeGraphic(2, 7, FlxColor.YELLOW);
 		activa = false;
 		if (_tipoDisparo == "aliado" || _tipoDisparo == "enemigo")
 			tipoDisparo = _tipoDisparo;
@@ -42,7 +42,7 @@ class Disparo extends FlxSprite
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		if (y <= 0)
+		if (y <= 0 || y >= FlxG.height)
 			resetear();
 	}
 	public function disparar(_x:Float, _y:Float)
@@ -56,9 +56,9 @@ class Disparo extends FlxSprite
 			switch(tipoDisparo)
 			{
 				case "aliado":
-					velocity.y = -70;
+					velocity.y = -30;
 				case "enemigo":
-					velocity.y = 70;
+					velocity.y = 30;
 			}
 		}
 	}
