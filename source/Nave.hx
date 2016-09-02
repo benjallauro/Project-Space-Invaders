@@ -5,10 +5,6 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 
-/**
- * ...
- * @author ...
- */
 class Nave extends FlxSprite
 {
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
@@ -34,5 +30,8 @@ class Nave extends FlxSprite
 		else if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT)
 			x -= 1;				
 	}
-	
+	public function daniar() : Void
+	{
+		trace("nave daniada");
+	}
 }

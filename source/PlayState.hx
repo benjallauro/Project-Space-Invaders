@@ -56,7 +56,25 @@ class PlayState extends FlxState
 	}
 	public function checkColisiones():Void
 	{
-		
+		for (i in 0...arrayDisparos.length) 
+		{
+			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], zazz))
+			{
+				zazz.daniar();
+				arrayDisparos[i].resetear();
+			}
+			else if (arrayDisparos[i].getTipoDisparo() == "aliado")
+			{
+				for (j in 0...arrayEnemigos.length) 
+				{
+					if (FlxG.overlap(arrayDisparos[i], arrayEnemigos[j]))
+					{
+						arrayEnemigos[j].destruir();
+						arrayDisparos[i].resetear();
+					}
+				}
+			}								
+		}
 	}
 	override public function create():Void
 	{
@@ -78,7 +96,8 @@ class PlayState extends FlxState
 			auxContSeg = 0;
 		}
 		for (j in 0...arrayDisparos.length) 
-			arrayDisparos[j].update(elapsed);
+			arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
+		checkColisiones();
 		if (FlxG.keys.pressed.SPACE)
 		{			
 			for (k in 0...arrayDisparos.length) 

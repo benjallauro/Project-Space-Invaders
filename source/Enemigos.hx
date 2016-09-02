@@ -19,17 +19,11 @@ class Enemigos extends FlxSprite
 	}
 	public function updateEnemigos()
 	{
-		mover();
-			
+		mover();		
 	}
 	private function mover()
 	{
-		//auxContSeg++;	
-		//if (auxContSeg == 60) 
-		//{
 			y += 1;
-			//auxContSeg = 0;
-		//}	
 	}
 	public function setPuedeDisparar(_puedeDisparar:Bool):Void
 	{
@@ -38,5 +32,10 @@ class Enemigos extends FlxSprite
 	public function getPuedeDisparar():Bool
 	{
 		return puedeDisparar;
+	}
+	public function destruir():Void
+	{
+		trace("enemigo daniado");
+		destroy();
 	}
 }

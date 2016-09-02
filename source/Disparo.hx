@@ -39,11 +39,10 @@ class Disparo extends FlxSprite
 	{
 		return tipoDisparo;
 	}
-	override public function update(elapsed:Float):Void 
+	public function updateDisparos(_nave:Nave, _arrayEnemigos:Array<Enemigos>):Void 
 	{
-		super.update(elapsed);
 		if (y <= 0 || y >= FlxG.height)
-			resetear();
+			resetear();		
 	}
 	public function disparar(_x:Float, _y:Float)
 	{
@@ -56,18 +55,18 @@ class Disparo extends FlxSprite
 			switch(tipoDisparo)
 			{
 				case "aliado":
-					velocity.y = -30;
+					velocity.y = -70;
 				case "enemigo":
 					velocity.y = 30;
 			}
 		}
 	}
-	private function resetear()
+	public function resetear():Void
 	{
 		activa = false;
 		velocity.y = 0;
-		x = 10;
-		y = 10;
+		x = -10;
+		y = -10;
 		visible = false;
 	}	
 }
