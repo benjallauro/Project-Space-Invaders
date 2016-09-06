@@ -63,6 +63,7 @@ class PlayState extends FlxState
 				zazz.daniar();
 				arrayDisparos[i].resetear();
 			}
+			
 			else if (arrayDisparos[i].getTipoDisparo() == "aliado")
 			{
 				for (j in 0...arrayEnemigos.length) 
@@ -74,6 +75,11 @@ class PlayState extends FlxState
 					}
 				}
 			}								
+		}
+		for (j in 0...arrayEnemigos.length)
+		{
+			if (FlxG.overlap(arrayEnemigos[j], zazz))
+			zazz.daniar();
 		}
 	}
 	override public function create():Void
