@@ -27,7 +27,7 @@ class PlayState extends FlxState
 		for (i in 0...5) 
 			arrayEnemigos.push(new Enemigos(true,arrayEnemigos[arrayEnemigos.length - 1].x + arrayEnemigos[arrayEnemigos.length - 1].width + arrayEnemigos[arrayEnemigos.length - 1].width / 2 , arrayEnemigos[0].height*2));
 		for (i in 0...arrayEnemigos.length) 
-			add(arrayEnemigos[i]);		
+			add(arrayEnemigos[i]);
 	}
 	public function crearDisparos():Void
 	{
@@ -98,13 +98,13 @@ class PlayState extends FlxState
 		for (j in 0...arrayDisparos.length) 
 			arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
 		checkColisiones();
-		if (FlxG.keys.pressed.SPACE)
+		if (FlxG.keys.pressed.SPACE && zazz.exists)
 		{			
 			for (k in 0...arrayDisparos.length) 
 			{
 				if (arrayDisparos[k].getTipoDisparo() == "aliado")					
 					arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
 			}
-		}					
+		}
 	}
 }
