@@ -9,6 +9,7 @@ class Reg
 		inline static public var velocidadDisparo = 300;
 		inline static public var vidasIniciales = 3;
 		//Del profesor. Usado como apunte. Temporal.
+		
 	}
 	
 }

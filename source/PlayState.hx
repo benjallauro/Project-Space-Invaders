@@ -13,17 +13,10 @@ import flixel.math.FlxMath;
  */
 class PlayState extends FlxState
 {
-<<<<<<< HEAD
-	var arrayEnemigos:Array<Enemigos>;
-	
-	
-	
-=======
 	private var zazz:Nave;
 	private var arrayEnemigos:Array<Enemigos>;	
 	private var arrayDisparos:Array<Disparo> = new Array();
 	private var auxContSeg:Int = 0;
->>>>>>> origin/master
 	public function crearEnemigos():Void
 	{
 		arrayEnemigos = new Array();
@@ -92,18 +85,10 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-<<<<<<< HEAD
-		
-		crearEnemigos();
-		
-		var zazz:Nave = new Nave();
-		add(zazz);	
-=======
 		zazz = new Nave();
 		crearEnemigos();	
 		crearDisparos();		 		
 		add(zazz);
->>>>>>> origin/master
 	}
 	override public function update(elapsed:Float):Void
 	{

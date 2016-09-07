@@ -9,25 +9,6 @@ import flixel.FlxG;
  * @author ...
  */
 class Disparo extends FlxSprite
-<<<<<<< HEAD
-{	
-public function new(?X:Float = 0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
-	{
-		super(X, Y, SimpleGraphic);
-		super.makeGraphic(5, 10, FlxColor.WHITE);
-		velocity.y = -50;
-	}
-
-	override public function update(elapsed:Float):Void
-	{
-		super.update(elapsed);
-		
-		if (y < 0)
-		{
-			destroy();
-		}
-	}
-=======
 {
 	private var tipoDisparo:String;
 	private var activa:Bool;
@@ -88,5 +69,4 @@ public function new(?X:Float = 0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 		y = -10;
 		visible = false;
 	}	
->>>>>>> origin/master
 }
