@@ -511,11 +511,7 @@ class ApplicationMain {
 		
 		config = {
 			
-<<<<<<< HEAD
-			build: "154",
-=======
-			build: "344",
->>>>>>> origin/master
+			build: "2",
 			company: "HaxeFlixel",
 			file: "Project Space Invaders",
 			fps: 60,
