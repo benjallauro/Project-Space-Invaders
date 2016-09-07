@@ -20,6 +20,12 @@ class AssetData {
 			type.set ("assets/data/data-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/Enemigo1.1.png", "assets/images/Enemigo1.1.png");
 			type.set ("assets/images/Enemigo1.1.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Enemigo1.2.png", "assets/images/Enemigo1.2.png");
+			type.set ("assets/images/Enemigo1.2.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Enemigo1.3.png", "assets/images/Enemigo1.3.png");
+			type.set ("assets/images/Enemigo1.3.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Enemigo1.4.png", "assets/images/Enemigo1.4.png");
+			type.set ("assets/images/Enemigo1.4.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Enemigo1.png", "assets/images/Enemigo1.png");
 			type.set ("assets/images/Enemigo1.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");

@@ -18,20 +18,20 @@ class PlayState extends FlxState
 	{	
 		arrayEnemigos = new Array();
 		
-		arrayEnemigos.push(new Enemigos(false, 10, 10));
+		arrayEnemigos.push(new Enemigos(1,false, 10, 10));
 		
 		for (i in 0...Reg.cantEnemigosPorLinea-1) 
-			arrayEnemigos.push(new Enemigos(false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , 10));
+			arrayEnemigos.push(new Enemigos(1,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , 10));
 		
-		arrayEnemigos.push(new Enemigos(false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));
+		arrayEnemigos.push(new Enemigos(2,false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));
 			
 		for (i in 0...Reg.cantEnemigosPorLinea-1) 
-			arrayEnemigos.push(new Enemigos(false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , arrayEnemigos[0].y + Reg.heightEnemigos + Reg.espacioEntreEnem));
+			arrayEnemigos.push(new Enemigos(2,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , arrayEnemigos[0].y + Reg.heightEnemigos + Reg.espacioEntreEnem));
 		
-		arrayEnemigos.push(new Enemigos(false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));
+		arrayEnemigos.push(new Enemigos(3,false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));
 			
 		for (i in 0...Reg.cantEnemigosPorLinea-1) 
-			arrayEnemigos.push(new Enemigos(false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem, arrayEnemigos[0].y + Reg.heightEnemigos*2 + Reg.espacioEntreEnem*2));
+			arrayEnemigos.push(new Enemigos(3,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem, arrayEnemigos[0].y + Reg.heightEnemigos*2 + Reg.espacioEntreEnem*2));
 			
 		for (i in 0...arrayEnemigos.length) 
 			add(arrayEnemigos[i]);

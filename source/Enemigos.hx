@@ -12,18 +12,22 @@ class Enemigos extends FlxSprite
 	private var direccion:String;
 	private var decender:Bool = false;
 	private var justoBajo:Bool = false;
-	public function new(_puedeDisparar:Bool,?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	public function new(tipoEnemigo:Int,_puedeDisparar:Bool,?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
 		puedeDisparar = _puedeDisparar;
 		direccion = "derecha";
-		//if (puedeDisparar)
-			//makeGraphic(Reg.heightEnemigos, Reg.widhtEnemigos, FlxColor.BLUE);
-		//else
-			//makeGraphic(Reg.heightEnemigos, Reg.widhtEnemigos, FlxColor.GREEN);
-		loadGraphic(AssetPaths.Enemigo1__1__png);
-
-		
+		switch(tipoEnemigo)
+		{
+			case 1:
+				loadGraphic(AssetPaths.Enemigo1__1__png);
+			case 2:
+				loadGraphic(AssetPaths.Enemigo1__2__png);
+			case 3:
+				loadGraphic(AssetPaths.Enemigo1__3__png);
+			case 4:
+				loadGraphic(AssetPaths.Enemigo1__4__png);		
+		}					
 	}
 	public function updateEnemigos(_arrayEnemigos:Array<Enemigos>)
 	{
