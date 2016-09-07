@@ -17,10 +17,13 @@ class Enemigos extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		puedeDisparar = _puedeDisparar;
 		direccion = "derecha";
-		if (puedeDisparar)
-			makeGraphic(Reg.heightEnemigos, Reg.widhtEnemigos, FlxColor.BLUE);
-		else
-			makeGraphic(Reg.heightEnemigos, Reg.widhtEnemigos, FlxColor.GREEN);
+		//if (puedeDisparar)
+			//makeGraphic(Reg.heightEnemigos, Reg.widhtEnemigos, FlxColor.BLUE);
+		//else
+			//makeGraphic(Reg.heightEnemigos, Reg.widhtEnemigos, FlxColor.GREEN);
+		loadGraphic(AssetPaths.Enemigo1__1__png);
+
+		
 	}
 	public function updateEnemigos(_arrayEnemigos:Array<Enemigos>)
 	{

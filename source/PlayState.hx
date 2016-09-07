@@ -113,11 +113,13 @@ class PlayState extends FlxState
 	}
 	override public function create():Void
 	{
+		FlxG.cameras.bgColor = 0xFFFFFFFF;		
 		super.create();
 		zazz = new Nave();
 		crearEnemigos();	
 		crearDisparos();		 		
 		add(zazz);
+		
 	}	
 	override public function update(elapsed:Float):Void
 	{
