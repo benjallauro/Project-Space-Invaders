@@ -13,6 +13,9 @@ class PlayState extends FlxState
 	private var arrayEnemigos:Array<Enemigos>;	
 	private var arrayDisparos:Array<Disparo> = new Array();
 	private var auxContSeg:Int = 0;
+	private var shield1:Escudo;
+	private var shield2:Escudo;
+	private var shield3:Escudo;
 	
 	public function crearEnemigos():Void
 	{	
@@ -70,6 +73,24 @@ class PlayState extends FlxState
 				zazz.daniar();
 				arrayDisparos[i].resetear();
 			}
+			//Shield1
+		if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield1))
+			{
+				shield1.daniar();
+				arrayDisparos[i].resetear();
+			}
+			//Shield2
+		if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield2))
+			{
+				shield2.daniar();
+				arrayDisparos[i].resetear();
+			}
+				//Shield3
+		if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield3))
+			{
+				shield3.daniar();
+				arrayDisparos[i].resetear();
+			}
 			
 			else if (arrayDisparos[i].getTipoDisparo() == "aliado")
 			{
@@ -81,6 +102,21 @@ class PlayState extends FlxState
 						arrayEnemigos.remove(arrayEnemigos[j]);
 						arrayDisparos[i].resetear();
 					}
+					if (FlxG.overlap(arrayDisparos[i], shield1))
+					{	
+						shield1.daniar();
+						arrayDisparos[i].resetear();
+					}
+					if (FlxG.overlap(arrayDisparos[i], shield2))
+					{	
+						shield2.daniar();
+						arrayDisparos[i].resetear();
+					}
+					if (FlxG.overlap(arrayDisparos[i], shield3))
+					{	
+						shield3.daniar();
+						arrayDisparos[i].resetear();
+					}
 				}
 			}								
 		}
@@ -88,6 +124,21 @@ class PlayState extends FlxState
 		{
 			if (FlxG.overlap(arrayEnemigos[j], zazz))
 			zazz.daniar();
+		}
+		for (j in 0...arrayEnemigos.length)
+		{
+			if (FlxG.overlap(arrayEnemigos[j], shield1))
+			shield1.daniar();
+		}
+		for (j in 0...arrayEnemigos.length)
+		{
+			if (FlxG.overlap(arrayEnemigos[j], shield2))
+			shield2.daniar();
+		}
+		for (j in 0...arrayEnemigos.length)
+		{
+			if (FlxG.overlap(arrayEnemigos[j], shield3))
+			shield3.daniar();
 		}
 	}	
 	public function updateEnemigos():Void
@@ -116,10 +167,18 @@ class PlayState extends FlxState
 		FlxG.cameras.bgColor = 0xFFFFFFFF;		
 		super.create();
 		zazz = new Nave();
+		shield1 = new Escudo((FlxG.width / 4), 90);
+		shield1.x -= shield1.width / 2;
+		shield2 = new Escudo((FlxG.width / 2), 90);
+		shield2.x -= shield2.width / 2;
+		shield3 = new Escudo((FlxG.width / 4) * 3, 90);
+		shield3.x -= shield3.width / 2;
 		crearEnemigos();	
 		crearDisparos();		 		
 		add(zazz);
-		
+		add(shield1);
+		add(shield2);
+		add(shield3);
 	}	
 	override public function update(elapsed:Float):Void
 	{
