@@ -11,6 +11,7 @@ class Enemigos extends FlxSprite
 	private var puedeDisparar:Bool;
 	private var direccion:String;
 	private var decender:Bool = false;
+	private var justoBajo:Bool = false;
 	public function new(_puedeDisparar:Bool,?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -23,7 +24,7 @@ class Enemigos extends FlxSprite
 	}
 	public function updateEnemigos(_arrayEnemigos:Array<Enemigos>)
 	{
-		checkPuedeDisparar(_arrayEnemigos);
+		puedeDisparar = checkPuedeDisparar(_arrayEnemigos);
 		mover();
 	}
 	public function mover()
@@ -34,22 +35,24 @@ class Enemigos extends FlxSprite
 			x += 10;
 			else if (direccion == "izquierda")
 			x -= 10;	
+			justoBajo = false;
 		}
-		else
+		else if (!justoBajo && decender)
 		{
 			y += 10;
 			decender = false;
+			justoBajo = true;
 		}	
 	}
-	private function checkPuedeDisparar(_arrayEnemigos:Array<Enemigos>):Void
+	private function checkPuedeDisparar(_arrayEnemigos:Array<Enemigos>):Bool
 	{
 		for (i in 0..._arrayEnemigos.length) 
 		{
 			if (y + Reg.heightEnemigos + Reg.espacioEntreEnem == _arrayEnemigos[i].y && x == _arrayEnemigos[i].x)
-				puedeDisparar = false;
-			else
-				puedeDisparar = true;
+				return false;
+			
 		}
+		return true;
 	}
 	public function checkDireccion():Bool
 	{
@@ -60,12 +63,14 @@ class Enemigos extends FlxSprite
 	}
 	public function cambiarDireccion():Void
 	{
-		if (!decender)
+		if (!justoBajo)
+		{
 			decender = true;
 		if (direccion == "derecha")
 			direccion = "izquierda";
 		else if (direccion == "izquierda")
 			direccion = "derecha";
+		}
 	}
 	public function setPuedeDisparar(_puedeDisparar:Bool):Void
 	{
@@ -77,7 +82,6 @@ class Enemigos extends FlxSprite
 	}
 	public function destruir():Void
 	{
-		trace("enemigo daniado");
 		destroy();
 	}
 }

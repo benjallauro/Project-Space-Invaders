@@ -48,7 +48,7 @@ class PlayState extends FlxState
 	{
 		for (i in 0...arrayEnemigos.length) 
 		{
-			if (arrayEnemigos[i].getPuedeDisparar() && FlxG.random.int(1,1) == 1) 
+			if (arrayEnemigos[i].getPuedeDisparar() && FlxG.random.int(1,5) == 1) 
 			{
 				for (j in 0...arrayDisparos.length) 
 				{
