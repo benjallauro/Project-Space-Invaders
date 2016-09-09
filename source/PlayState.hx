@@ -16,6 +16,7 @@ class PlayState extends FlxState
 	private var shield1:Escudo;
 	private var shield2:Escudo;
 	private var shield3:Escudo;
+	private var ufo:Ovni;
 	
 	public function crearEnemigos():Void
 	{	
@@ -46,7 +47,12 @@ class PlayState extends FlxState
 			arrayDisparos.push(new Disparo("enemigo", arrayEnemigos[0].x, arrayEnemigos[0].y));		
 		for (i in 0...arrayDisparos.length) 
 			add(arrayDisparos[i]);
-	}	
+	}
+	public function crearOvni():Void
+	{
+			var ufo:Ovni = new Ovni();
+			add(ufo);
+	}
 	public function dispararEnemigos():Void
 	{
 		for (i in 0...arrayEnemigos.length) 
@@ -90,6 +96,10 @@ class PlayState extends FlxState
 			{
 				shield3.daniar();
 				arrayDisparos[i].resetear();
+			}
+		if (FlxG.overlap(arrayDisparos[i], ufo))
+			{
+				ufo.recibioDisparo();
 			}
 			
 			else if (arrayDisparos[i].getTipoDisparo() == "aliado")
@@ -173,12 +183,14 @@ class PlayState extends FlxState
 		shield2.x -= shield2.width / 2;
 		shield3 = new Escudo((FlxG.width / 4) * 3, 90);
 		shield3.x -= shield3.width / 2;
+		ufo = new Ovni();
 		crearEnemigos();	
 		crearDisparos();		 		
 		add(zazz);
 		add(shield1);
 		add(shield2);
 		add(shield3);
+		add(ufo);
 	}	
 	override public function update(elapsed:Float):Void
 	{
