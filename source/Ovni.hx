@@ -26,7 +26,7 @@ class Ovni extends FlxSprite
 	public function recibioDisparo()
 	{
 		x += 1000;
-		//Acá se pondria la suma de puntuación (o en el PlayState).
+		Reg.score += 50;
 		trace("El disparo colisiono con el ovni");
 	}
 	override public function update(elapsed:Float):Void

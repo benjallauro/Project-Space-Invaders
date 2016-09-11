@@ -90,5 +90,6 @@ class Enemigos extends FlxSprite
 	public function destruir():Void
 	{
 		destroy();
+		Reg.score += 10;
 	}
 }

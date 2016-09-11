@@ -11,6 +11,7 @@ class MenuState extends FlxState
 {
 	private var texto:FlxText;
 	private var titulo:FlxText;
+	private var highscore:FlxText;
 	private var auxContSeg:Int = 0;
 	override public function create():Void
 	{
@@ -19,12 +20,16 @@ class MenuState extends FlxState
 		titulo.text = "Space Invaders";
 		titulo.scale.x = 2;
 		titulo.scale.y = 2;
+		titulo.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF07389f);
 		texto = new FlxText();
 		texto.x = FlxG.width/2 - 28;
 		texto.y = FlxG.height/2;
 		texto.text = "Press Enter";
+		highscore = new FlxText(0,FlxG.height - 13 );
+		highscore.text = "Highscore: " + Reg.highscore;
 		add(titulo);
 		add(texto);
+		add(highscore);
 	}
 
 	override public function update(elapsed:Float):Void

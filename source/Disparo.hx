@@ -15,12 +15,17 @@ class Disparo extends FlxSprite
 	public function new(_tipoDisparo:String,?X:Float, ?Y:Float, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(2, 7, FlxColor.YELLOW);
 		activa = false;
 		if (_tipoDisparo == "aliado" || _tipoDisparo == "enemigo")
 			tipoDisparo = _tipoDisparo;
 		else 
 			trace("El tipoDisparo esta mal");	
+			
+			
+		if (_tipoDisparo == "aliado")
+			loadGraphic(AssetPaths.BalasNave__png);
+		else if ( _tipoDisparo == "enemigo")
+			loadGraphic(AssetPaths.BalasEnemigos__png);
 		visible = false;		
 	}	
 	public function  GetX():Float

@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 
@@ -23,22 +24,18 @@ class Nave extends FlxSprite
 	{
 		return y;
 	}	
-
+	public function getVida():Int
+	{
+		return vida;
+	}
 	public function daniar() : Void
 	{
 		trace("nave daniada");
 		vida--;
-		if (vida <= 0)
-		gameLost();
+		
 	}
 	
-	public function gameLost() : Void
-	{
-		destroy();
-		trace("GAME OVER");
-		var chau:GameOver = new GameOver();
-		FlxG.state.add(chau);
-	}
+	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
