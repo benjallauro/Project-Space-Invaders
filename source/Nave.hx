@@ -34,6 +34,12 @@ class Nave extends FlxSprite
 		vida--;
 		
 	}
+	public function salirVolando()
+	{
+		vida = 100;
+		while (y > (0 - height))
+		y--;
+	}
 	
 	
 	override public function update(elapsed:Float):Void 

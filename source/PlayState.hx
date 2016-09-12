@@ -9,6 +9,8 @@ import flixel.math.FlxMath;
 
 class PlayState extends FlxState
 {
+	var enemigosDestruidos:Int = 0;
+	var juegoGanado:Bool = false;
 	private var zazz:Nave;
 	private var arrayEnemigos:Array<Enemigos>;	
 	private var arrayDisparos:Array<Disparo> = new Array();
@@ -20,6 +22,7 @@ class PlayState extends FlxState
 	private var scoreText:FlxText;
 	private var gameover:FlxText;
 	private var continuar:FlxText;
+	private var victoria:FlxText;
 	private var vida1:VidasNave;
 	private var vida2:VidasNave;
 	private var vida3:VidasNave;
@@ -141,6 +144,7 @@ class PlayState extends FlxState
 						arrayEnemigos[j].destruir();
 						arrayEnemigos.remove(arrayEnemigos[j]);
 						arrayDisparos[i].resetear();
+						enemigosDestruidos++;
 					}
 					if (FlxG.overlap(arrayDisparos[i], shield1))
 					{	
@@ -219,6 +223,24 @@ class PlayState extends FlxState
 			FlxG.switchState(new ScoreState());
 		}
 	}
+	public function ganar()
+		{
+			victoria.visible = true;
+			continuar.visible = true;
+			ufo.destroy();
+			scoreText.destroy();
+			gameover.destroy();
+			zazz.salirVolando();
+			if (FlxG.keys.justPressed.ENTER) 
+			{
+				shield1.destroy();
+				shield2.destroy();
+				shield3.destroy();
+				continuar.destroy();
+				zazz.destroy();
+				FlxG.switchState(new ScoreState());
+			}
+		}
 	override public function create():Void
 	{
 		FlxG.cameras.bgColor = 0xFFFFFFFF;	
@@ -251,6 +273,13 @@ class PlayState extends FlxState
 		continuar.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0xFF000000);
 		continuar.text = "Presiona ENTER para continuar";
 		continuar.visible = false;
+		victoria = new FlxText(FlxG.width / 2 - 25, FlxG.height / 2 - 20);
+		victoria.scale.x = 3;
+		victoria.scale.y = 3;
+		victoria.color = 0xFFFFFF00;
+		victoria.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0xFF000000);
+		victoria.text = "VICTORIA";
+		victoria.visible = false;
 		crearVidas();
 		add(zazz);
 		add(shield1);
@@ -259,7 +288,8 @@ class PlayState extends FlxState
 		add(ufo);
 		add(scoreText);
 		add(gameover);
-		add(continuar);	
+		add(continuar);
+		add(victoria);
 	}	
 	override public function update(elapsed:Float):Void
 	{
@@ -283,5 +313,10 @@ class PlayState extends FlxState
 			zazz.destroy();
 			gameLost();
 		}
+		if (enemigosDestruidos == 21)
+			{
+				enemigosDestruidos = 0;
+				ganar();
+			}
 	}
 }
