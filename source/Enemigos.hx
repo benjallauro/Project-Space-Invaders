@@ -57,7 +57,6 @@ class Enemigos extends FlxSprite
 		{
 			if (y + Reg.heightEnemigos + Reg.espacioEntreEnem == _arrayEnemigos[i].y && x == _arrayEnemigos[i].x)
 				return false;
-			
 		}
 		return true;
 	}
@@ -91,5 +90,6 @@ class Enemigos extends FlxSprite
 	{
 		destroy();
 		Reg.score += 10;
+		Reg.cantEnemigosDestruidos++;
 	}
 }

@@ -12,7 +12,7 @@ class Nave extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);		
-		makeGraphic(14, 14, FlxColor.RED);		
+		loadGraphic(AssetPaths.zazz__png);
 		x = (FlxG.width / 2) - width / 2;
 		y = 120;
 	}
@@ -33,15 +33,7 @@ class Nave extends FlxSprite
 		trace("nave daniada");
 		vida--;
 		
-	}
-	public function salirVolando()
-	{
-		vida = 100;
-		while (y > (0 - height))
-		y--;
-	}
-	
-	
+	}	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);

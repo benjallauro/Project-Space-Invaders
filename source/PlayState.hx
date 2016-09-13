@@ -9,8 +9,6 @@ import flixel.math.FlxMath;
 
 class PlayState extends FlxState
 {
-	var enemigosDestruidos:Int = 0;
-	var juegoGanado:Bool = false;
 	private var zazz:Nave;
 	private var arrayEnemigos:Array<Enemigos>;	
 	private var arrayDisparos:Array<Disparo> = new Array();
@@ -106,6 +104,14 @@ class PlayState extends FlxState
 	{
 		for (i in 0...arrayDisparos.length) 
 		{
+			for (k in 0...arrayDisparos.length) 
+			{
+				if (FlxG.overlap(arrayDisparos[i],arrayDisparos[k])&&arrayDisparos[i].getTipoDisparo() == "enemigo" && arrayDisparos[k].getTipoDisparo() =="aliado") 
+				{
+					arrayDisparos[i].resetear();
+					arrayDisparos[k].resetear();
+				}
+			}
 			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], zazz))
 			{
 				zazz.daniar();
@@ -113,28 +119,28 @@ class PlayState extends FlxState
 				sacarVidas();
 			}
 			//Shield1
-		if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield1))
+			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield1))
 			{
 				shield1.daniar();
 				arrayDisparos[i].resetear();
 			}
 			//Shield2
-		if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield2))
+			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield2))
 			{
 				shield2.daniar();
 				arrayDisparos[i].resetear();
 			}
 				//Shield3
-		if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield3))
+			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield3))
 			{
 				shield3.daniar();
 				arrayDisparos[i].resetear();
 			}
-		if (FlxG.overlap(arrayDisparos[i], ufo))
+			if (FlxG.overlap(arrayDisparos[i], ufo))
 			{
 				ufo.recibioDisparo();
 			}
-			
+
 			else if (arrayDisparos[i].getTipoDisparo() == "aliado")
 			{
 				for (j in 0...arrayEnemigos.length) 
@@ -144,7 +150,7 @@ class PlayState extends FlxState
 						arrayEnemigos[j].destruir();
 						arrayEnemigos.remove(arrayEnemigos[j]);
 						arrayDisparos[i].resetear();
-						enemigosDestruidos++;
+						
 					}
 					if (FlxG.overlap(arrayDisparos[i], shield1))
 					{	
@@ -230,9 +236,9 @@ class PlayState extends FlxState
 			ufo.destroy();
 			scoreText.destroy();
 			gameover.destroy();
-			zazz.salirVolando();
 			if (FlxG.keys.justPressed.ENTER) 
 			{
+				trace("asda");
 				shield1.destroy();
 				shield2.destroy();
 				shield3.destroy();
@@ -243,8 +249,9 @@ class PlayState extends FlxState
 		}
 	override public function create():Void
 	{
-		FlxG.cameras.bgColor = 0xFFFFFFFF;	
+		FlxG.cameras.bgColor = 0xFF1abcc9;	
 		Reg.score = 0;
+		Reg.juegoGanado = false;
 		super.create();
 		zazz = new Nave();
 		shield1 = new Escudo((FlxG.width / 4), 90);
@@ -294,29 +301,38 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		scoreText.text =  "Score: " + Reg.score;
-		auxContSeg++;	
-		updateEnemigos();
-		for (j in 0...arrayDisparos.length) 
-			arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
-		checkColisiones();
-		if (FlxG.keys.pressed.SPACE && zazz.exists)
-		{			
-			for (k in 0...arrayDisparos.length) 
-			{
-				if (arrayDisparos[k].getTipoDisparo() == "aliado")					
-					arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
-			}
-		}
-		if (zazz.getVida()==0)
+		if (!Reg.juegoGanado)
 		{
-			zazz.destroy();
-			gameLost();
-		}
-		if (enemigosDestruidos == 21)
-			{
-				enemigosDestruidos = 0;
-				ganar();
+			scoreText.text =  "Score: " + Reg.score;
+			auxContSeg++;	
+			updateEnemigos();
+			for (j in 0...arrayDisparos.length) 
+				arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
+			checkColisiones();
+			if (FlxG.keys.pressed.SPACE && zazz.exists)
+			{			
+				for (k in 0...arrayDisparos.length) 
+				{
+					if (arrayDisparos[k].getTipoDisparo() == "aliado")					
+						arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
+				}
 			}
+			if (zazz.getVida()==0)
+			{
+				zazz.destroy();
+				gameLost();
+			}
+			if (Reg.cantEnemigosDestruidos == Reg.cantTotalEnemigos)
+			{
+				Reg.cantEnemigosDestruidos = 0;
+				ganar();
+				Reg.juegoGanado = true;
+			}
+		}
+		else 
+		{
+			ganar();
+			zazz.y--;
+		}
 	}
 }

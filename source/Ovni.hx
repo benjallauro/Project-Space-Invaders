@@ -14,7 +14,7 @@ class Ovni extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(14, 5, FlxColor.GREEN);
+		loadGraphic(AssetPaths.OVNI__png);
 		x = 1200;
 		y = 2;
 	}

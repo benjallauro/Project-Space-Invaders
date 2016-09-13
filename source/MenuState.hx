@@ -16,6 +16,7 @@ class MenuState extends FlxState
 	private var auxContSeg:Int = 0;
 	private var splash:Bool = true;
 	private var tituloB:Bool = false;
+	private var tituloA:Bool = false;
 	override public function create():Void
 	{
 		super.create();
@@ -30,7 +31,7 @@ class MenuState extends FlxState
 		texto.text = "Press Enter";
 		highscore = new FlxText(0,FlxG.height - 13 );
 		highscore.text = "Highscore: " + Reg.highscore;
-		nombres = new FlxText(30, 40);
+		nombres = new FlxText(31, 40);
 		nombres.text = "Desarrollado por:\n Benjamin llauro\n             y\nJoaquin Liberatore";
 		titulo.visible = false;
 		texto.visible = false;
@@ -41,39 +42,50 @@ class MenuState extends FlxState
 		add(texto);
 		add(highscore);
 	}
-
-	override public function update(elapsed:Float):Void
+	private function splashScreen():Void
 	{
-		auxContSeg++;
 		if (auxContSeg < 60 * 4 && splash)
 			nombres.alpha += 0.005;
 		else if (auxContSeg >= 60 * 4 && splash)
 			nombres.alpha -= 0.008;
-		
 		if (nombres.alpha == 0 && tituloB == false)
-			{
-				splash = false;
-				texto.visible = true;
-				titulo.visible = true;
-				highscore.visible = true;
-				tituloB = true;
-				auxContSeg = 0;
-			}
-		if (tituloB)
+			pasarDeTitulo();
+	}
+	private function tituloScreen():Void
+	{
+		if (auxContSeg == 30 && texto.visible == true) 
 		{
-			if (auxContSeg == 30 && texto.visible == true) 
-			{
-				texto.visible = false;
-				auxContSeg = 0;
-			}
-			else if (auxContSeg == 30 && texto.visible == false)
-			{
-				texto.visible = true;
-				auxContSeg = 0;
-			}
+			texto.visible = false;
+			auxContSeg = 0;
 		}
-		super.update(elapsed);
+		else if (auxContSeg == 30 && texto.visible == false)
+		{
+			texto.visible = true;
+			auxContSeg = 0;
+		}
 		if (FlxG.keys.justPressed.ENTER)
 			FlxG.switchState(new PlayState());
+	}
+	private function pasarDeTitulo():Void
+	{
+		trace("Asda");
+		splash = false;
+		nombres.visible = false;
+		texto.visible = true;
+		titulo.visible = true;
+		highscore.visible = true;
+		tituloB = true;
+		tituloA = true;
+		auxContSeg = 0;
+	}
+	override public function update(elapsed:Float):Void
+	{
+		auxContSeg++;
+		splashScreen();
+		if ((tituloB || FlxG.keys.justPressed.ANY)&&!tituloA)
+			pasarDeTitulo();
+		else if (tituloA)
+			tituloScreen();
+		super.update(elapsed);
 	}
 }
