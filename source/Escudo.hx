@@ -11,7 +11,7 @@ import flixel.FlxG;
  */
 class Escudo extends FlxSprite
 {
-	var vida:Int = 5;
+	var vida:Int = 6;
 	private var subeYbaja:Bool = true;
 	private var auxContSeg:Int = 0;
 	public function new(X:Float=0, Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
@@ -24,7 +24,11 @@ class Escudo extends FlxSprite
 	{
 		trace("Escudo daniado");
 		vida--;
-		if (vida <= 0)
+		if (vida == 4)
+			loadGraphic(AssetPaths.EscudoDaniado__png);
+		else if (vida == 2)
+			loadGraphic(AssetPaths.EscudoDaniado2__png);
+		else if (vida <= 0)
 		destruirEscudo();
 	}
 	
