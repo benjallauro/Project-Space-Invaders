@@ -9,6 +9,7 @@ import flixel.math.FlxMath;
 
 class PlayState extends FlxState
 {
+	private var nubes:Array<Nube>;
 	private var zazz:Nave;
 	private var arrayEnemigos:Array<Enemigos>;	
 	private var arrayDisparos:Array<Disparo> = new Array();
@@ -214,6 +215,32 @@ class PlayState extends FlxState
 			auxContSeg = 0;
 		}
 	}
+		private function crearNubes():Void
+	{
+		nubes = new Array();
+		nubes[0] = new Nube(0,0);
+		nubes[1] = new Nube(0,60);
+		nubes[2] = new Nube(1,100);
+		nubes[3] = new Nube(1,20);
+		nubes[4] = new Nube(2,50);
+		nubes[5] = new Nube(2, 30);
+		for (i in 0...nubes.length) 
+		{
+			add(nubes[i]);
+		}
+	}
+	private function moverNubes():Void
+	{
+		for (i in 0...nubes.length) 
+		{
+			nubes[i].updateNube();
+			if (FlxG.random.int(1, 30) == 1)
+			{
+				nubes[i].launch(); 
+				
+			}
+		}
+	}
 	private function gameLost() : Void
 	{
 		gameover.visible = true;
@@ -254,6 +281,7 @@ class PlayState extends FlxState
 		Reg.score = 0;
 		Reg.juegoGanado = false;
 		super.create();
+		crearNubes();
 		zazz = new Nave();
 		shield1 = new Escudo((FlxG.width / 4), 90);
 		shield1.x -= shield1.width / 2;
@@ -304,6 +332,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		if (!Reg.juegoGanado)
 		{
+			moverNubes();
 			scoreText.text =  "Score: " + Reg.score;
 			auxContSeg++;	
 			updateEnemigos();

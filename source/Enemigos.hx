@@ -21,13 +21,23 @@ class Enemigos extends FlxSprite
 		switch(tipoEnemigo)
 		{
 			case 1:
-				loadGraphic(AssetPaths.Enemigo1__1__png);
+				{
+					loadGraphic(AssetPaths.Enemigo1__1Anim__png, true, 10, 10);
+					animation.add("idle", [0, 1], 2, true);
+					animation.play("idle");
+				}
 			case 2:
-				loadGraphic(AssetPaths.Enemigo1__2__png);
+				{
+					loadGraphic(AssetPaths.Enemigo1__2Anim__png, true, 10, 10);
+					animation.add("idle", [0, 1, 2], 2, true);
+					animation.play("idle");
+				}
 			case 3:
-				loadGraphic(AssetPaths.Enemigo1__3__png);
-			case 4:
-				loadGraphic(AssetPaths.Enemigo1__4__png);		
+				{
+					loadGraphic(AssetPaths.Enemigo1__3Anim__png, true, 10, 10);
+					animation.add("idle", [0, 1], 2, true);
+					animation.play("idle");
+				}	
 		}					
 	}
 	public function updateEnemigos(_arrayEnemigos:Array<Enemigos>)

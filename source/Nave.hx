@@ -12,7 +12,9 @@ class Nave extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);		
-		loadGraphic(AssetPaths.zazz__png);
+		loadGraphic(AssetPaths.NaveAnim__png,true,14,14);
+		animation.add("idle", [0, 1], 4, true);
+		animation.play("idle");
 		x = (FlxG.width / 2) - width / 2;
 		y = 120;
 	}
