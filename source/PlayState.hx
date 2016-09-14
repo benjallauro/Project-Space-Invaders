@@ -25,6 +25,7 @@ class PlayState extends FlxState
 	private var vida1:VidasNave;
 	private var vida2:VidasNave;
 	private var vida3:VidasNave;
+
 	public function crearEnemigos():Void
 	{	
 		arrayEnemigos = new Array();
@@ -326,6 +327,7 @@ class PlayState extends FlxState
 		add(gameover);
 		add(continuar);
 		add(victoria);
+		FlxG.sound.play(AssetPaths.gamestart__wav);
 	}	
 	override public function update(elapsed:Float):Void
 	{
@@ -347,8 +349,8 @@ class PlayState extends FlxState
 						arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
 				}
 			}
-			if (ufo.x < (FlxG.width + 300))
-			FlxG.sound.play(AssetPaths.OVNI__wav);
+			if (ufo.x <= (FlxG.width) + 100)
+				ufo.revisarLlegada();
 			if (zazz.getVida()==0)
 			{
 				zazz.destroy();

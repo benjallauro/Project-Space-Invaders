@@ -20,8 +20,8 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		titulo = new FlxText(42,25);
-		titulo.text = "Space Invaders";
+		titulo = new FlxText(50,25);
+		titulo.text = "Sky Invaders";
 		titulo.scale.x = 2;
 		titulo.scale.y = 2;
 		titulo.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF1abcc9);
@@ -65,7 +65,6 @@ class MenuState extends FlxState
 		}
 		if (FlxG.keys.justPressed.ENTER)
 		{
-			FlxG.sound.play(AssetPaths.gamestart__wav);
 			destroyThis();
 			FlxG.switchState(new PlayState());
 		}
