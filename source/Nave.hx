@@ -33,6 +33,8 @@ class Nave extends FlxSprite
 		trace("nave daniada");
 		vida--;
 		Reg.score-= 50;
+		if (vida == 0)
+		FlxG.sound.play(AssetPaths.Death__wav);
 	}	
 	override public function update(elapsed:Float):Void 
 	{

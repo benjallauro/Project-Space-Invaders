@@ -27,6 +27,7 @@ class Ovni extends FlxSprite
 	{
 		x += 1000;
 		Reg.score += 50;
+		
 		trace("El disparo colisiono con el ovni");
 	}
 	override public function update(elapsed:Float):Void

@@ -89,6 +89,7 @@ class Enemigos extends FlxSprite
 	public function destruir():Void
 	{
 		destroy();
+		FlxG.sound.play(AssetPaths.enemigodestruido__wav);
 		Reg.score += 10;
 		Reg.cantEnemigosDestruidos++;
 	}

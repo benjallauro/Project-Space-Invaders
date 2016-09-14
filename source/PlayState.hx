@@ -94,6 +94,7 @@ class PlayState extends FlxState
 					if (arrayDisparos[j].getTipoDisparo() == "enemigo" && !arrayDisparos[j].getActiva()) 
 					{
 						arrayDisparos[j].disparar(arrayEnemigos[i].x + arrayEnemigos[i].width / 2, arrayEnemigos[i].y + arrayEnemigos[i].height);
+						FlxG.sound.play(AssetPaths.disparoenemigo__wav);
 						break;
 					}
 				}
@@ -310,13 +311,15 @@ class PlayState extends FlxState
 				arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
 			checkColisiones();
 			if (FlxG.keys.pressed.SPACE && zazz.exists)
-			{			
+			{	
 				for (k in 0...arrayDisparos.length) 
 				{
 					if (arrayDisparos[k].getTipoDisparo() == "aliado")					
 						arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
 				}
 			}
+			if (ufo.x < (FlxG.width + 300))
+			FlxG.sound.play(AssetPaths.OVNI__wav);
 			if (zazz.getVida()==0)
 			{
 				zazz.destroy();

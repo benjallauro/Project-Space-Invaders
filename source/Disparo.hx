@@ -61,6 +61,7 @@ class Disparo extends FlxSprite
 			{
 				case "aliado":
 					velocity.y = -120;
+					FlxG.sound.play(AssetPaths.disparoaliado__wav);	
 				case "enemigo":
 					velocity.y = 70;
 			}
