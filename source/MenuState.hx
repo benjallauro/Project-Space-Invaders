@@ -65,6 +65,7 @@ class MenuState extends FlxState
 		}
 		if (FlxG.keys.justPressed.ENTER)
 		{
+			FlxG.sound.play(AssetPaths.gamestart__wav);
 			destroyThis();
 			FlxG.switchState(new PlayState());
 		}

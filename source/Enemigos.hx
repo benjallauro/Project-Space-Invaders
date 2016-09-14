@@ -12,6 +12,7 @@ class Enemigos extends FlxSprite
 	private var direccion:String;
 	private var decender:Bool = false;
 	private var justoBajo:Bool = false;
+	private var boolSonido:Bool = true;
 	public function new(tipoEnemigo:Int,_puedeDisparar:Bool,?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -36,6 +37,11 @@ class Enemigos extends FlxSprite
 	}
 	public function mover()
 	{
+		if (boolSonido = true)
+		FlxG.sound.play(AssetPaths.enemigomoviendose1__wav);
+		else
+		FlxG.sound.play(AssetPaths.enemigomoviendose2__wav);
+		
 		if (!decender) 
 		{
 			if (direccion == "derecha")
