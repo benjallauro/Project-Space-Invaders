@@ -32,7 +32,7 @@ class Nave extends FlxSprite
 	{
 		trace("nave daniada");
 		vida--;
-		
+		Reg.score-= 50;
 	}	
 	override public function update(elapsed:Float):Void 
 	{

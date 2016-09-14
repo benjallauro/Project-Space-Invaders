@@ -64,7 +64,11 @@ class MenuState extends FlxState
 			auxContSeg = 0;
 		}
 		if (FlxG.keys.justPressed.ENTER)
+		{
+			destroyThis();
 			FlxG.switchState(new PlayState());
+		}
+			
 	}
 	private function pasarDeTitulo():Void
 	{
@@ -77,6 +81,14 @@ class MenuState extends FlxState
 		tituloB = true;
 		tituloA = true;
 		auxContSeg = 0;
+	}
+	private function destroyThis():Void
+	{
+		texto.destroy();
+		titulo.destroy();
+		highscore.destroy();
+		nombres.destroy();
+		
 	}
 	override public function update(elapsed:Float):Void
 	{
