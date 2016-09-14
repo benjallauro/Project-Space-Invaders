@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 /**
@@ -10,7 +11,8 @@ import flixel.FlxG;
  */
 class Ovni extends FlxSprite
 {
-	var ovnillegando:Bool = false;
+	private var ovnillegando:Bool = false;
+	private var sonidoOvni:FlxSound;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -19,12 +21,16 @@ class Ovni extends FlxSprite
 		animation.play("idle");
 		x = 1200;
 		y = 2;
+		
+		sonidoOvni = new FlxSound();
+		sonidoOvni.loadEmbedded(AssetPaths.OVNI__wav);
+		sonidoOvni.volume = 1;
 	}
 	public function revisarLlegada()
 	{
 		if (ovnillegando == false)
 			{
-				FlxG.sound.play(AssetPaths.OVNI__wav, 0.1);
+				sonidoOvni.play();
 				ovnillegando == true;
 			}
 	}
@@ -33,6 +39,7 @@ class Ovni extends FlxSprite
 		x += 1000;
 		trace("El ovni se escapo");
 		ovnillegando = false;
+		sonidoOvni.stop();
 	}
 	public function recibioDisparo()
 	{
@@ -40,6 +47,7 @@ class Ovni extends FlxSprite
 		Reg.score += 50;
 		ovnillegando = false;
 		trace("El disparo colisiono con el ovni");
+		sonidoOvni.stop();
 	}
 	
 	override public function update(elapsed:Float):Void
