@@ -20,18 +20,22 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		titulo = new FlxText(50,25);
+		titulo = new FlxText(50, 25);
+		titulo.color = 0xFFd6ff00;
 		titulo.text = "Sky Invaders";
 		titulo.scale.x = 2;
 		titulo.scale.y = 2;
 		titulo.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF1abcc9);
 		texto = new FlxText();
+		texto.color = 0xffd6ff00;
 		texto.x = FlxG.width/2 - 28;
 		texto.y = FlxG.height/2;
 		texto.text = "Press Enter";
-		highscore = new FlxText(0,FlxG.height - 13 );
+		highscore = new FlxText(0, FlxG.height - 13 );
+		highscore.color = 0xffd6ff00;
 		highscore.text = "Highscore: " + Reg.highscore;
 		nombres = new FlxText(31, 40);
+		nombres.color = 0xffd6ff00;
 		nombres.text = "Desarrollado por:\n Benjamin llauro\n             y\nJoaquin Liberatore";
 		titulo.visible = false;
 		texto.visible = false;

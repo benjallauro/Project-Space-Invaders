@@ -47,12 +47,13 @@ class Disparo extends FlxSprite
 	public function updateDisparos(_nave:Nave, _arrayEnemigos:Array<Enemigos>):Void 
 	{
 		if (y <= 0 || y >= FlxG.height)
-			resetear();		
+			destroy();	
 	}
 	public function disparar(_x:Float, _y:Float)
 	{
 		if (activa == false) 
 		{
+			revive();
 			activa = true;
 			x = _x;
 			y = _y;
@@ -60,10 +61,10 @@ class Disparo extends FlxSprite
 			switch(tipoDisparo)
 			{
 				case "aliado":
-					velocity.y = -120;
+					velocity.y = -200;
 					FlxG.sound.play(AssetPaths.disparoaliado__wav);	
 				case "enemigo":
-					velocity.y = 70;
+					velocity.y = 150;
 			}
 		}
 	}

@@ -21,7 +21,7 @@ class Ovni extends FlxSprite
 		animation.play("idle");
 		x = 1200;
 		y = 2;
-		
+		velocity.x = -60;
 		sonidoOvni = new FlxSound();
 		sonidoOvni.loadEmbedded(AssetPaths.OVNI__wav);
 		sonidoOvni.volume = 1;
@@ -53,7 +53,7 @@ class Ovni extends FlxSprite
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		x -= 1;
+		//x -= 1;
 		if (x <= (0 - width))
 		escape();
 	}

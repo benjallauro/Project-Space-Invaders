@@ -12,6 +12,8 @@ class Reg
 	static public var cantTotalEnemigos:Int = cantEnemigosPorLinea * 3;
 	static public var cantEnemigosDestruidos:Int = 0;
 	static public var juegoGanado:Bool = false;
+	static public var cantDisparosMax:Int = 3;
+	static public var cantDisparosPantalla: Int = 0;
 	static public function checkHighscore():Bool
 	{
 		if (score > highscore)

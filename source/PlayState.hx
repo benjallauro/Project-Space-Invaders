@@ -48,14 +48,20 @@ class PlayState extends FlxState
 		for (i in 0...arrayEnemigos.length) 
 			add(arrayEnemigos[i]);
 	}	
-	public function crearDisparos():Void
-	{
-		arrayDisparos.push(new Disparo("aliado", zazz.x + zazz.width - zazz.width / 2, zazz.y));		
-		for (i in 0...3)
-			arrayDisparos.push(new Disparo("enemigo", arrayEnemigos[0].x, arrayEnemigos[0].y));		
-		for (i in 0...arrayDisparos.length) 
-			add(arrayDisparos[i]);
-	}
+	//public function crearDisparos():Void
+	//{
+		//arrayDisparos.push(new Disparo("aliado", zazz.x + zazz.width - zazz.width / 2, zazz.y));		
+		//for (i in 0...3)
+			//arrayDisparos.push(new Disparo("enemigo", arrayEnemigos[0].x, arrayEnemigos[0].y));		
+		//for (i in 0...arrayDisparos.length) 
+		//{
+			//add(arrayDisparos[i]);
+			//arrayDisparos[i].kill();
+		//}
+			//
+			//
+	//
+	//}
 	public function crearOvni():Void
 	{
 			var ufo:Ovni = new Ovni();
@@ -89,20 +95,38 @@ class PlayState extends FlxState
 	{
 		for (i in 0...arrayEnemigos.length) 
 		{
-			if (arrayEnemigos[i].getPuedeDisparar() && FlxG.random.int(1,6) == 1) 
+			if (arrayEnemigos[i].getPuedeDisparar() && FlxG.random.int(1,1) == 1 && Reg.cantDisparosPantalla<Reg.cantDisparosMax) 
 			{
-				for (j in 0...arrayDisparos.length) 
-				{
-					if (arrayDisparos[j].getTipoDisparo() == "enemigo" && !arrayDisparos[j].getActiva()) 
-					{
-						arrayDisparos[j].disparar(arrayEnemigos[i].x + arrayEnemigos[i].width / 2, arrayEnemigos[i].y + arrayEnemigos[i].height);
-						FlxG.sound.play(AssetPaths.disparoenemigo__wav);
-						break;
-					}
-				}
+				
+				arrayDisparos.push(new Disparo("enemigo", arrayEnemigos[0].x, arrayEnemigos[0].y));
+				arrayDisparos[arrayDisparos.length - 1].disparar(arrayEnemigos[i].x + arrayEnemigos[i].width / 2, arrayEnemigos[i].y + arrayEnemigos[i].height);
+				FlxG.sound.play(AssetPaths.disparoenemigo__wav);
+				add(arrayDisparos[arrayDisparos.length - 1]);
+				Reg.cantDisparosPantalla++;
+				trace("Asdasd");
+				
+				//for (j in 0...arrayDisparos.length) 
+				//{
+					//if (arrayDisparos[j].getTipoDisparo() == "enemigo" && !arrayDisparos[j].getActiva()) 
+					//{
+						//arrayDisparos[j].disparar(arrayEnemigos[i].x + arrayEnemigos[i].width / 2, arrayEnemigos[i].y + arrayEnemigos[i].height);
+						//FlxG.sound.play(AssetPaths.disparoenemigo__wav);
+						//break;
+					//}
+				//}
 			}
 		}
-	}	
+	}
+	public function dispararNave():Void
+	{
+		arrayDisparos.push(new Disparo("aliado", zazz.x + zazz.width - zazz.width / 2, zazz.y));
+		arrayDisparos[arrayDisparos.length - 1].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
+		zazz.setDisparo(true);
+		add(arrayDisparos[arrayDisparos.length - 1]);
+		
+			//if (arrayDisparos[k].getTipoDisparo() == "aliado")					
+				//arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
+	}
 	public function checkColisiones():Void
 	{
 		for (i in 0...arrayDisparos.length) 
@@ -111,33 +135,42 @@ class PlayState extends FlxState
 			{
 				if (FlxG.overlap(arrayDisparos[i],arrayDisparos[k])&&arrayDisparos[i].getTipoDisparo() == "enemigo" && arrayDisparos[k].getTipoDisparo() =="aliado") 
 				{
-					arrayDisparos[i].resetear();
-					arrayDisparos[k].resetear();
+					arrayDisparos[i].destroy();
+					arrayDisparos[k].destroy();
+					Reg.cantDisparosPantalla--;
 				}
 			}
 			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], zazz))
 			{
 				zazz.daniar();
-				arrayDisparos[i].resetear();
+				arrayDisparos[i].destroy();
 				sacarVidas();
+				trace("zazz");
+				Reg.cantDisparosPantalla--;
 			}
 			//Shield1
 			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield1))
 			{
 				shield1.daniar();
-				arrayDisparos[i].resetear();
+				arrayDisparos[i].destroy();
+				trace("sh1");
+				Reg.cantDisparosPantalla--;
 			}
 			//Shield2
 			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield2))
 			{
 				shield2.daniar();
-				arrayDisparos[i].resetear();
+				trace("sh2");
+				arrayDisparos[i].destroy();
+				Reg.cantDisparosPantalla--;
 			}
 				//Shield3
 			if (arrayDisparos[i].getTipoDisparo() == "enemigo" && FlxG.overlap(arrayDisparos[i], shield3))
 			{
 				shield3.daniar();
-				arrayDisparos[i].resetear();
+				trace("sh3");
+				arrayDisparos[i].destroy();
+				Reg.cantDisparosPantalla--;
 			}
 			if (FlxG.overlap(arrayDisparos[i], ufo))
 			{
@@ -152,23 +185,28 @@ class PlayState extends FlxState
 					{		
 						arrayEnemigos[j].destruir();
 						arrayEnemigos.remove(arrayEnemigos[j]);
-						arrayDisparos[i].resetear();
+						arrayDisparos[i].destroy();
+						zazz.setDisparo(false);
+						
 						
 					}
 					if (FlxG.overlap(arrayDisparos[i], shield1))
 					{	
 						shield1.daniar();
-						arrayDisparos[i].resetear();
+						arrayDisparos[i].destroy();
+						zazz.setDisparo(false);
 					}
 					if (FlxG.overlap(arrayDisparos[i], shield2))
 					{	
 						shield2.daniar();
-						arrayDisparos[i].resetear();
+						arrayDisparos[i].destroy();
+						zazz.setDisparo(false);
 					}
 					if (FlxG.overlap(arrayDisparos[i], shield3))
 					{	
 						shield3.daniar();
-						arrayDisparos[i].resetear();
+						arrayDisparos[i].destroy();
+						zazz.setDisparo(false);
 					}
 				}
 			}								
@@ -216,7 +254,7 @@ class PlayState extends FlxState
 			auxContSeg = 0;
 		}
 	}
-		private function crearNubes():Void
+	private function crearNubes():Void
 	{
 		nubes = new Array();
 		nubes[0] = new Nube(0,0);
@@ -259,12 +297,13 @@ class PlayState extends FlxState
 		}
 	}
 	public function ganar()
-		{
+	{
 			victoria.visible = true;
 			continuar.visible = true;
 			ufo.destroy();
 			scoreText.destroy();
 			gameover.destroy();
+			moverNubes();
 			if (FlxG.keys.justPressed.ENTER) 
 			{
 				trace("asda");
@@ -292,8 +331,9 @@ class PlayState extends FlxState
 		shield3.x -= shield3.width / 2;
 		ufo = new Ovni();
 		crearEnemigos();	
-		crearDisparos();
+		//crearDisparos();
 		scoreText = new FlxText(0, FlxG.height - 15);
+		scoreText.color = 0xffd6ff00;
 		scoreText.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0xFF000000);
 		scoreText.text = "Score: " + Reg.score;
 		scoreText.scale.x = 0.7;
@@ -341,13 +381,9 @@ class PlayState extends FlxState
 			for (j in 0...arrayDisparos.length) 
 				arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
 			checkColisiones();
-			if (FlxG.keys.pressed.SPACE && zazz.exists)
+			if (FlxG.keys.pressed.SPACE && zazz.exists && !zazz.getDisparo())
 			{	
-				for (k in 0...arrayDisparos.length) 
-				{
-					if (arrayDisparos[k].getTipoDisparo() == "aliado")					
-						arrayDisparos[k].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
-				}
+				dispararNave();
 			}
 			if (ufo.x <= (FlxG.width) + 100)
 				ufo.revisarLlegada();
@@ -363,6 +399,7 @@ class PlayState extends FlxState
 				Reg.juegoGanado = true;
 			}
 		}
+		
 		else 
 		{
 			ganar();

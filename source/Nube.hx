@@ -40,7 +40,7 @@ class Nube extends FlxSprite
 	}
 	public function updateNube():Void
 	{
-		trace(y);
+		
 		if (y >= FlxG.height+height) 
 		{
 			y = 0-height*2;
