@@ -55,7 +55,7 @@ class ScoreState extends FlxState
 					}
 				case 1:
 					{
-						highscoreText.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF07389f);
+						highscoreText.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF1abcc9);
 						colorHighscore++;
 					}
 				case 2:

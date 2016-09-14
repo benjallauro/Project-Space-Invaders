@@ -60,9 +60,9 @@ class Disparo extends FlxSprite
 			switch(tipoDisparo)
 			{
 				case "aliado":
-					velocity.y = -70;
+					velocity.y = -120;
 				case "enemigo":
-					velocity.y = 30;
+					velocity.y = 70;
 			}
 		}
 	}

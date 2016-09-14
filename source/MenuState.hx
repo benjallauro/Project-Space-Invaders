@@ -24,7 +24,7 @@ class MenuState extends FlxState
 		titulo.text = "Space Invaders";
 		titulo.scale.x = 2;
 		titulo.scale.y = 2;
-		titulo.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF07389f);
+		titulo.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFF1abcc9);
 		texto = new FlxText();
 		texto.x = FlxG.width/2 - 28;
 		texto.y = FlxG.height/2;
