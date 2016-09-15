@@ -47,13 +47,13 @@ class Disparo extends FlxSprite
 	public function updateDisparos(_nave:Nave, _arrayEnemigos:Array<Enemigos>):Void 
 	{
 		if (y <= 0 || y >= FlxG.height)
-			destroy();	
+			resetear();
 	}
 	public function disparar(_x:Float, _y:Float)
 	{
 		if (activa == false) 
 		{
-			revive();
+			
 			activa = true;
 			x = _x;
 			y = _y;
