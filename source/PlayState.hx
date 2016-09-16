@@ -323,6 +323,7 @@ class PlayState extends FlxState
 	{
 		FlxG.cameras.bgColor = 0xFF1abcc9;	
 		Reg.score = 0;
+		Reg.cantEnemigosDestruidos = 0;
 		Reg.juegoGanado = false;
 		super.create();
 		crearNubes();
@@ -404,7 +405,6 @@ class PlayState extends FlxState
 				Reg.juegoGanado = true;
 			}
 		}
-		
 		else 
 		{
 			ganar();
