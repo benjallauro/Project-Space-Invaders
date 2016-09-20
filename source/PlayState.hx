@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import flixel.system.FlxSound;
 
 class PlayState extends FlxState
 {
@@ -25,6 +26,8 @@ class PlayState extends FlxState
 	private var vida1:VidasNave;
 	private var vida2:VidasNave;
 	private var vida3:VidasNave;
+	private var lastDefense:FlxSound;
+	private var disparoEnemigo:FlxSound;
 
 	public function crearEnemigos():Void
 	{	
@@ -110,7 +113,7 @@ class PlayState extends FlxState
 					if (arrayDisparos[j].getTipoDisparo() == "enemigo" && !arrayDisparos[j].getActiva()) 
 					{
 						arrayDisparos[j].disparar(arrayEnemigos[i].x + arrayEnemigos[i].width / 2, arrayEnemigos[i].y + arrayEnemigos[i].height);
-						FlxG.sound.play(AssetPaths.disparoenemigo__wav);
+						disparoEnemigo.play();
 						break;
 					}
 				}
@@ -288,6 +291,7 @@ class PlayState extends FlxState
 	{
 		gameover.visible = true;
 		continuar.visible = true;
+		lastDefense.stop();
 		if (FlxG.keys.justPressed.ENTER) 
 		{
 			shield1.destroy();
@@ -297,6 +301,7 @@ class PlayState extends FlxState
 			scoreText.destroy();
 			gameover.destroy();
 			continuar.destroy();
+			lastDefense.destroy();
 			FlxG.switchState(new ScoreState());
 		}
 	}
@@ -308,6 +313,7 @@ class PlayState extends FlxState
 			scoreText.destroy();
 			gameover.destroy();
 			moverNubes();
+			lastDefense.stop();
 			if (FlxG.keys.justPressed.ENTER) 
 			{
 				trace("asda");
@@ -316,6 +322,7 @@ class PlayState extends FlxState
 				shield3.destroy();
 				continuar.destroy();
 				zazz.destroy();
+				lastDefense.destroy();
 				FlxG.switchState(new ScoreState());
 			}
 		}
@@ -373,6 +380,13 @@ class PlayState extends FlxState
 		add(continuar);
 		add(victoria);
 		FlxG.sound.play(AssetPaths.gamestart__wav);
+		lastDefense = new FlxSound();
+		lastDefense.loadEmbedded(AssetPaths.Last_Defense__wav);
+		lastDefense.volume = 1;
+		lastDefense.play();
+		disparoEnemigo = new FlxSound();
+		disparoEnemigo.loadEmbedded(AssetPaths.disparoenemigo__wav);
+		disparoEnemigo.volume = 1;
 	}	
 	override public function update(elapsed:Float):Void
 	{
