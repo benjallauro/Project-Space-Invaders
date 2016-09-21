@@ -17,7 +17,6 @@ class Enemigos extends FlxSprite
 	private var disparoEnemigo:FlxSound;
 	private var enemigomoviendose1:FlxSound;
 	private var enemigomoviendose2:FlxSound;
-	
 	public function new(tipoEnemigo:Int,_puedeDisparar:Bool,?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -62,7 +61,6 @@ class Enemigos extends FlxSprite
 		enemigomoviendose1.play();
 		else
 		enemigomoviendose2.play();
-		
 		if (!decender) 
 		{
 			if (direccion == "derecha")
@@ -99,10 +97,10 @@ class Enemigos extends FlxSprite
 		if (!justoBajo)
 		{
 			decender = true;
-		if (direccion == "derecha")
-			direccion = "izquierda";
-		else if (direccion == "izquierda")
-			direccion = "derecha";
+			if (direccion == "derecha")
+				direccion = "izquierda";
+			else if (direccion == "izquierda")
+				direccion = "derecha";
 		}
 	}
 	public function setPuedeDisparar(_puedeDisparar:Bool):Void

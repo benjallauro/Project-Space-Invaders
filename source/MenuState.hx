@@ -91,8 +91,7 @@ class MenuState extends FlxState
 		texto.destroy();
 		titulo.destroy();
 		highscore.destroy();
-		nombres.destroy();
-		
+		nombres.destroy();	
 	}
 	override public function update(elapsed:Float):Void
 	{

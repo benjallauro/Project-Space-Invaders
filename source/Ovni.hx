@@ -29,10 +29,10 @@ class Ovni extends FlxSprite
 	public function revisarLlegada()
 	{
 		if (ovnillegando == false)
-			{
-				sonidoOvni.play();
-				ovnillegando == true;
-			}
+		{
+			sonidoOvni.play();
+			ovnillegando == true;
+		}
 	}
 	public function escape()
 	{
@@ -53,7 +53,6 @@ class Ovni extends FlxSprite
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		//x -= 1;
 		if (x <= (0 - width))
 		escape();
 	}

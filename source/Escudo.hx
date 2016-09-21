@@ -19,7 +19,6 @@ class Escudo extends FlxSprite
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.Escudo__png);
 	}
-	
 	public function daniar()
 	{
 		trace("Escudo daniado");
@@ -31,13 +30,11 @@ class Escudo extends FlxSprite
 		else if (vida <= 0)
 		destruirEscudo();
 	}
-	
 	public function destruirEscudo()
 	{
 		trace("Escudo destruido");
 		destroy();
 	}
-	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);

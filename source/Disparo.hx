@@ -19,9 +19,7 @@ class Disparo extends FlxSprite
 		if (_tipoDisparo == "aliado" || _tipoDisparo == "enemigo")
 			tipoDisparo = _tipoDisparo;
 		else 
-			trace("El tipoDisparo esta mal");	
-			
-			
+			trace("El tipoDisparo esta mal");		
 		if (_tipoDisparo == "aliado")
 			loadGraphic(AssetPaths.BalasNave__png);
 		else if ( _tipoDisparo == "enemigo")
@@ -53,7 +51,6 @@ class Disparo extends FlxSprite
 	{
 		if (activa == false) 
 		{
-			
 			activa = true;
 			x = _x;
 			y = _y;

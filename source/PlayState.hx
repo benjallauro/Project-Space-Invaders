@@ -28,26 +28,18 @@ class PlayState extends FlxState
 	private var vida3:VidasNave;
 	private var lastDefense:FlxSound;
 	private var disparoEnemigo:FlxSound;
-
 	public function crearEnemigos():Void
 	{	
-		arrayEnemigos = new Array();
-		
-		arrayEnemigos.push(new Enemigos(1,false, 10, 10));
-		
+		arrayEnemigos = new Array();	
+		arrayEnemigos.push(new Enemigos(1,false, 10, 10));	
 		for (i in 0...Reg.cantEnemigosPorLinea-1) 
-			arrayEnemigos.push(new Enemigos(1,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , 10));
-		
-		arrayEnemigos.push(new Enemigos(2,false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));
-			
+			arrayEnemigos.push(new Enemigos(1,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , 10));		
+		arrayEnemigos.push(new Enemigos(2,false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));			
 		for (i in 0...Reg.cantEnemigosPorLinea-1) 
-			arrayEnemigos.push(new Enemigos(2,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , arrayEnemigos[0].y + Reg.heightEnemigos + Reg.espacioEntreEnem));
-		
-		arrayEnemigos.push(new Enemigos(3,false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));
-			
+			arrayEnemigos.push(new Enemigos(2,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem , arrayEnemigos[0].y + Reg.heightEnemigos + Reg.espacioEntreEnem));		
+		arrayEnemigos.push(new Enemigos(3,false, 10, arrayEnemigos[arrayEnemigos.length - 1].y + Reg.heightEnemigos + Reg.espacioEntreEnem ));			
 		for (i in 0...Reg.cantEnemigosPorLinea-1) 
-			arrayEnemigos.push(new Enemigos(3,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem, arrayEnemigos[0].y + Reg.heightEnemigos*2 + Reg.espacioEntreEnem*2));
-			
+			arrayEnemigos.push(new Enemigos(3,false,arrayEnemigos[arrayEnemigos.length - 1].x + Reg.widhtEnemigos + Reg.espacioEntreEnem, arrayEnemigos[0].y + Reg.heightEnemigos*2 + Reg.espacioEntreEnem*2));	
 		for (i in 0...arrayEnemigos.length) 
 			add(arrayEnemigos[i]);
 	}	
@@ -57,13 +49,7 @@ class PlayState extends FlxState
 		for (i in 0...3)
 			arrayDisparos.push(new Disparo("enemigo", arrayEnemigos[0].x, arrayEnemigos[0].y));		
 		for (i in 0...arrayDisparos.length) 
-		{
 			add(arrayDisparos[i]);
-		
-		}
-			
-			
-	
 	}
 	public function crearOvni():Void
 	{
@@ -100,14 +86,6 @@ class PlayState extends FlxState
 		{
 			if (arrayEnemigos[i].getPuedeDisparar() && FlxG.random.int(1,1) == 1 && Reg.cantDisparosPantalla<Reg.cantDisparosMax) 
 			{
-				
-				//arrayDisparos.push(new Disparo("enemigo", arrayEnemigos[0].x, arrayEnemigos[0].y));
-				//arrayDisparos[arrayDisparos.length - 1].disparar(arrayEnemigos[i].x + arrayEnemigos[i].width / 2, arrayEnemigos[i].y + arrayEnemigos[i].height);
-				//FlxG.sound.play(AssetPaths.disparoenemigo__wav);
-				//add(arrayDisparos[arrayDisparos.length - 1]);
-				//Reg.cantDisparosPantalla++;
-				//trace("Asdasd");
-				
 				for (j in 0...arrayDisparos.length) 
 				{
 					if (arrayDisparos[j].getTipoDisparo() == "enemigo" && !arrayDisparos[j].getActiva()) 
@@ -122,17 +100,11 @@ class PlayState extends FlxState
 	}
 	public function dispararNave():Void
 	{
-		//arrayDisparos.push(new Disparo("aliado", zazz.x + zazz.width - zazz.width / 2, zazz.y));
-		//arrayDisparos[arrayDisparos.length - 1].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
-		//zazz.setDisparo(true);
-		//add(arrayDisparos[arrayDisparos.length - 1]);
 		for (i in 0...arrayDisparos.length) 
 		{			
 			if (arrayDisparos[i].getTipoDisparo() == "aliado")					
 				 arrayDisparos[i].disparar(zazz.GetX() + zazz.width / 2 - arrayDisparos[0].width/2, zazz.GetY());
-			
 		}
-
 	}
 	public function checkColisiones():Void
 	{
@@ -193,9 +165,7 @@ class PlayState extends FlxState
 						arrayEnemigos[j].destruir();
 						arrayEnemigos.remove(arrayEnemigos[j]);
 						arrayDisparos[i].resetear();
-						zazz.setDisparo(false);
-						
-						
+						zazz.setDisparo(false);						
 					}
 					if (FlxG.overlap(arrayDisparos[i], shield1))
 					{	
@@ -216,8 +186,7 @@ class PlayState extends FlxState
 						zazz.setDisparo(false);
 					}
 				}
-			}								
-		
+			}										
 				for (j in 0...arrayEnemigos.length)
 				{
 					if (FlxG.overlap(arrayEnemigos[j], zazz))
@@ -281,10 +250,7 @@ class PlayState extends FlxState
 		{
 			nubes[i].updateNube();
 			if (FlxG.random.int(1, 30) == 1)
-			{
-				nubes[i].launch(); 
-				
-			}
+				nubes[i].launch(); 				
 		}
 	}
 	private function gameLost() : Void
@@ -396,15 +362,12 @@ class PlayState extends FlxState
 			moverNubes();
 			scoreText.text =  "Score: " + Reg.score;
 			auxContSeg++;	
-			updateEnemigos();
-			
+			updateEnemigos();	
 			for (j in 0...arrayDisparos.length) 
 				arrayDisparos[j].updateDisparos(zazz, arrayEnemigos);
 			checkColisiones();
-			if (FlxG.keys.pressed.SPACE && zazz.exists)
-			{	
+			if (FlxG.keys.pressed.SPACE && zazz.exists)	
 				dispararNave();
-			}
 			if (ufo.x <= (FlxG.width) + 100)
 				ufo.revisarLlegada();
 			if (zazz.getVida()==0)
